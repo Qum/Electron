@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="supadupaskidkafacadeSystemSetup" class="org.dima.setup.SupadupaskidkafacadeSystemSetup">
+		<!-- constructor arg injection example -->
+		<constructor-arg ref="supadupaskidkafacadeService"/>
+	</bean>
+
+	<bean id="supadupaskidkafacadeService" class="org.dima.service.impl.DefaultSupadupaskidkafacadeService">
+		<!-- setter injection example -->
+		<property name="modelService" ref="modelService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<alias name="defaultOrderAwayDiscountService" alias="orderAwayDiscountService"/>
+	<bean id="defaultOrderAwayDiscountService" class="org.dima.service.impl.DefaultOrderAwayDiscountService">
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	<alias name="defaultProductDiscountOrderAwayPopulator" alias="productDiscountOrderAwayPopulator"/>
+	<bean id="defaultProductDiscountOrderAwayPopulator"
+	      class="org.dima.converters.populator.DefaultProductDiscountPopulator">
+		<property name="orderAwayDiscountService" ref="orderAwayDiscountService"/>
+	</bean>
+
+	<alias name="defaultProductDiscountOrderAwayConverter" alias="productDiscountOrderAwayConverter"/>
+	<bean id="defaultProductDiscountOrderAwayConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="productPopulator"/>
+				<ref bean="productDiscountOrderAwayPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductDiscountOrderAwayFacade" alias="productOrderAwayDiscountFacade"/>
+	<bean id="defaultProductDiscountOrderAwayFacade"
+	      class="de.hybris.platform.commercefacades.product.impl.DefaultProductVariantFacade"
+	      parent="defaultProductFacade">
+		<property name="productConverter" ref="productDiscountOrderAwayConverter"/>
+		<property name="productConfiguredPopulator" ref="productVariantConfiguredPopulator"/>
+		<property name="productConfigurationConverter" ref="orderEntryProductInfoConverter"/>
+	</bean>
+
+	<bean id="discountOrderAwayPriceValueProvider" class="org.dima.provider.DiscountOrderAwayPriceValueProvider"
+	      parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="orderAwayDiscountService" ref="orderAwayDiscountService"/>
+	</bean>
+
+	<bean id="searchResultProductHasDiscountPopulator" class="org.dima.converters.populator.SearchResultProductHasDiscountPopulator">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="orderAwayDiscountService" ref="orderAwayDiscountService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchResultProductHasDiscountPopulator"/>
+	</bean>
+
+</beans>

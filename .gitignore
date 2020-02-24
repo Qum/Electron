@@ -1,0 +1,44 @@
+ 
+.metadata
+classes
+hybris/bin/**/bin
+gensrc
+ 
+# Folders to ignore at the root of the repository
+log/
+temp/
+data/
+licenses/
+hybris/sampleconfigurations/
+
+  
+# filter only custom extension
+bin/*
+!bin/custom/
+ 
+# Absolute path to ignore
+config/local.properties
+ 
+# Filename patterns to ignore
+*.class
+build.xml
+Generated*.java
+platformhome.properties
+*testclasses.xml
+extensioninfo.xsd
+*hmc.jar
+hmc.xsd
+items.xsd
+beans.xsd
+ruleset.xml
+*.log
+base.properties
+
+
+#  Addon specific copy folders
+**/_ui/addons
+**/views/addons
+**/tld/addons
+**/tags/addons
+**/messages/addons
+*_bof.jar

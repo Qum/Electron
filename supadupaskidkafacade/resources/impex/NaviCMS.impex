@@ -1,0 +1,56 @@
+$contentCatalog=electronicsContentCatalog
+$contentCatalogName=Electronics Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/electronicsstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/electronicsstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/electronicsstore/import/sampledata/cockpits/cmscockpit
+$lang=en
+
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;GorenieBrandCategoryLink;Gorenie Link;/Brands/Gorenie/c/brand_400;GorenieBrandCategoryLink;GorenieBrandCategoryLink;;brand_400;;
+;;HansaBrandCategoryLink;Hansa Link;/Brands/Hansa/c/brand_401;HansaBrandCategoryLink;HansaBrandCategoryLink;;brand_401;;
+;;BekoBrandCategoryLink;Beko Link;/Brands/Beko/c/brand_402;BekoBrandCategoryLink;BekoBrandCategoryLink;;brand_402;;
+;;GretaBrandCategoryLink;Greta Link;/Brands/Greta/c/brand_403;GretaBrandCategoryLink;GretaBrandCategoryLink;;brand_403;;
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;GorenieBrandCategoryLink;"Gorenie"
+;;HansaBrandCategoryLink;"Hansa"
+;;BekoBrandCategoryLink;"Beko"
+;;GretaBrandCategoryLink;"Greta"
+
+# Category Pages
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
+;;Kitchen;Kitchen;ProductListPageTemplate;false;;CamerasPagePreview
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
+;BrandLinksNavNode;;Brand Links;CanonBrandNavNode,SonyBrandNavNode,KodakBrandNavNode,SamsungBrandNavNode,ToshibaBrandNavNode,FujifilmBrandNavNode,GorenieBrandNavNode,HansaBrandNavNode,BekoBrandNavNode,GretaBrandNavNode
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef
+;GorenieBrandNavNode;;Gorenie Brand Link;GorenieBrandNavNode
+;HansaBrandNavNode;;Hansa Brand Link;HansaBrandNavNode
+;BekoBrandNavNode;;Beko Brand Link;BekoBrandNavNode
+;GretaBrandNavNode;;Greta Brand Link;GretaBrandNavNode
+
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(CMSLinkComponent.uid,CMSLinkComponent.$contentCV);
+;GorenieBrandNavNodeEntry;;Gorenie Brand Navigation Node Entry;GorenieBrandNavNode;GorenieBrandCategoryLink;
+;HansaBrandNavNodeEntry;;Hansa Brand Navigation Node Entry;HansaBrandNavNode;HansaBrandCategoryLink;
+;BekoBrandNavNodeEntry;;Beko Brand Navigation Node Entry;BekoBrandNavNode;BekoBrandCategoryLink;
+;GretaBrandNavNodeEntry;;Greta Brand Navigation Node Entry;GretaBrandNavNode;GretaBrandCategoryLink;
+#test
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;AllBrandsCategoryLink;All Brands Link;/Brands/c/brands;AllBrandsCategoryLink;AllBrandsCategoryLink;;brands;;

@@ -7,7 +7,7 @@ import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.i18n.impl.DefaultCommonI18NService;
 
-import org.dima.service.impl.OrderAwayDiscountService;
+import org.dima.service.OrderAwayDiscountService;
 
 
 public class SearchResultProductHasDiscountPopulator implements Populator<SearchResultValueData, ProductData> {

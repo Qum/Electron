@@ -1,0 +1,61 @@
+
+INSERT_UPDATE Discount;code[unique=true];value;currency(isocode)
+                      ;train-discount;15;
+
+
+
+# Macros / Replacement Parameter definitions
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+
+INSERT_UPDATE DiscountRow;$catalogVersion;discount(code)[unique=true];ug(code);product(code,catalogVersion(catalog(id),version))[unique=true];value
+                         ;               ;train-discount    ;    ;14500:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14501:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14502:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14503:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14505:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14506:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14507:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14508:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14509:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14510:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14511:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14512:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14513:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14514:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14515:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14516:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14517:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14518:electronicsProductCatalog:Online;
+                         ;               ;train-discount    ;    ;14519:electronicsProductCatalog:Online;
+
+
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+INSERT_UPDATE DiscountRow;$catalogVersion;discount(code)[unique=true];ug(code);product(code,catalogVersion(catalog(id),version))[unique=true];value
+                         ;               ;train-discount    ;    ;14500:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14501:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14502:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14503:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14505:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14506:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14507:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14508:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14509:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14510:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14511:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14512:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14513:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14514:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14515:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14516:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14517:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14518:electronicsProductCatalog:Staged;
+                         ;               ;train-discount    ;    ;14519:electronicsProductCatalog:Staged;
+
+
