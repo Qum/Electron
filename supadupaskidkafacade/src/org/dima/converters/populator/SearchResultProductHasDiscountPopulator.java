@@ -12,12 +12,13 @@ import org.dima.service.OrderAwayDiscountService;
 
 public class SearchResultProductHasDiscountPopulator implements Populator<SearchResultValueData, ProductData> {
 
+	private static final String DISCOUNTED_PRICE_PARAM_NAME_FROM_CACHE = "discountValue";
 	private OrderAwayDiscountService defaultOrderAwayDiscountService;
 	private CommonI18NService commonI18NService;
 
 	@Override
 	public void populate(final SearchResultValueData source, final ProductData target) throws ConversionException {
-		final double discountedValue = (double) source.getValues().get("discountValue");
+		final double discountedValue = (double) source.getValues().get(DISCOUNTED_PRICE_PARAM_NAME_FROM_CACHE);
 
 		target.setDiscountedPrice(
 				defaultOrderAwayDiscountService.createPriceData(discountedValue, commonI18NService.getCurrentCurrency()));

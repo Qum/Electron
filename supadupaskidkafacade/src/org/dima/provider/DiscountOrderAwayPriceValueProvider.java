@@ -50,8 +50,8 @@ public class DiscountOrderAwayPriceValueProvider extends AbstractPropertyFieldVa
 
 	public void addFieldValues(final Collection<FieldValue> fieldValues, final ProductModel product,
 			final IndexedProperty indexedProperty, final CurrencyModel currency) {
-		String currencyIso = currency.getIsocode();
-		Collection<String> fieldNames = this.fieldNameProvider
+		final String currencyIso = currency.getIsocode();
+		final Collection<String> fieldNames = this.fieldNameProvider
 				.getFieldNames(indexedProperty, currencyIso.toLowerCase(Locale.ROOT));
 		final double discountedPrice = defaultOrderAwayDiscountService.discountForIndexin(product, currency);
 
