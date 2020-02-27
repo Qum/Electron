@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 import org.dima.service.OrderAwayDiscountService;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -31,6 +32,11 @@ public class DefaultOrderAwayDiscountService implements OrderAwayDiscountService
 
 	@Override
 	public PriceData getDiscountedPrice(final ProductModel product, final CurrencyModel currentCurrency) {
+
+		if (product == null || currentCurrency == null) {
+			throw new IllegalArgumentException("ProductModel and CurrencyModel most be nonNull");
+		}
+
 		final PriceData discountedPrice = new PriceData();
 		discountedPrice.setValue(BigDecimal.valueOf(0));
 		final PriceRowModel priceForActualCurrency = getPricesForActualCurrency(product, currentCurrency);
@@ -78,8 +84,9 @@ public class DefaultOrderAwayDiscountService implements OrderAwayDiscountService
 				actualDiscountsForCurrency.add(discoMod);
 			}
 			else {
-				final boolean isActualDiscountForCurrency = discoMod.getCurrency().getIsocode().equals(currentCurrency.getIsocode());
-				if(isActualDiscountForCurrency){
+				final boolean isActualDiscountForCurrency = discoMod.getCurrency().getIsocode()
+						.equals(currentCurrency.getIsocode());
+				if (isActualDiscountForCurrency) {
 					actualDiscountsForCurrency.add(discoMod);
 				}
 			}
@@ -100,7 +107,7 @@ public class DefaultOrderAwayDiscountService implements OrderAwayDiscountService
 		return isEmpty(pricesForActualUserCurrency) ? null : pricesForActualUserCurrency.get(0);
 	}
 
-	private void formatPriceData(final PriceData discountedPrice,  final CurrencyModel currencyModel){
+	private void formatPriceData(final PriceData discountedPrice, final CurrencyModel currencyModel) {
 		discountedPrice.setCurrencyIso(currencyModel.getIsocode());
 		discountedPrice.setFormattedValue(currencyModel.getSymbol() + discountedPrice.getValue());
 	}
