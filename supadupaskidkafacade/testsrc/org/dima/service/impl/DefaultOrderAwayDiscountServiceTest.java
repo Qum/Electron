@@ -133,7 +133,7 @@ public class DefaultOrderAwayDiscountServiceTest {
 		discountRowModels.add(discountRowModelForUSD);
 		discountRowModels.add(discountRowModelForJPY);
 
-		Double discountedPrice = DefaultOrderAwayDiscountService.getDiscountedPrice(productModel).getValue().doubleValue();
+		final Double discountedPrice = DefaultOrderAwayDiscountService.getDiscountedPrice(productModel).getValue().doubleValue();
 		assertEquals(EXPECTED_PRICE_AFTER_ABSOLUTE_DISCOUNT, discountedPrice);
 	}
 
@@ -144,8 +144,8 @@ public class DefaultOrderAwayDiscountServiceTest {
 		discountRowModels.add(discountRowModelForNotAbsolute);
 		discountRowModels.add(discountRowModelForJPY);
 
-		PriceData result = DefaultOrderAwayDiscountService.getDiscountedPrice(productModel);
-		Double discountedPrice = result.getValue().doubleValue();
+		final PriceData result = DefaultOrderAwayDiscountService.getDiscountedPrice(productModel);
+		final Double discountedPrice = result.getValue().doubleValue();
 		assertEquals(EXPECTED_PRICE_AFTER_PERCENTAGE_DISCOUNT, discountedPrice);
 	}
 
@@ -153,8 +153,8 @@ public class DefaultOrderAwayDiscountServiceTest {
 	public void shouldReturnZeroValueWhenNoDiscountAviableForProductOrRequiredCurrency() {
 		discountRowModels.add(discountRowModelForJPY);
 
-		PriceData result = DefaultOrderAwayDiscountService.getDiscountedPrice(productModel);
-		Double discountedPrice = result.getValue().doubleValue();
+		final PriceData result = DefaultOrderAwayDiscountService.getDiscountedPrice(productModel);
+		final Double discountedPrice = result.getValue().doubleValue();
 		assertEquals(ZERO, discountedPrice);
 	}
 
@@ -165,8 +165,8 @@ public class DefaultOrderAwayDiscountServiceTest {
 
 	@Test
 	public void shouldReturnPriceDataWithSpecifiedPrice() {
-		PriceData createdPriceData = DefaultOrderAwayDiscountService.createPriceData(SPECIFIED_PRICE, targetCurrencyModel);
-		String result = createdPriceData.getFormattedValue();
+		final PriceData createdPriceData = DefaultOrderAwayDiscountService.createPriceData(SPECIFIED_PRICE, targetCurrencyModel);
+		final String result = createdPriceData.getFormattedValue();
 		assertEquals(EXPECTED_STRING_DISPLAY,result);
 	}
 }

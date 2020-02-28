@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
-import org.apache.commons.collections4.CollectionUtils;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import org.dima.service.OrderAwayDiscountService;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -39,9 +39,9 @@ public class DiscountOrderAwayPriceValueProvider extends AbstractPropertyFieldVa
 			throw new FieldValueProviderException("Cannot evaluate price of non-product item");
 		}
 
-		Collection<CurrencyModel> aviableCurrencyes = indexConfig.getCurrencies();
+		final Collection<CurrencyModel> aviableCurrencyes = indexConfig.getCurrencies();
 
-		if (indexedProperty.isCurrency() && CollectionUtils.isNotEmpty(aviableCurrencyes)) {
+		if (indexedProperty.isCurrency() && isNotEmpty(aviableCurrencyes)) {
 			aviableCurrencyes.forEach(currency -> addFieldValues(fieldValues, product, indexedProperty, currency));
 		}
 
