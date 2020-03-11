@@ -418,6 +418,7 @@ public class ProductPageController extends AbstractPageController
 				ProductOption.DELIVERY_MODE_AVAILABILITY));
 
 		options.addAll(extraOptions);
+		ProductOption.values();
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, options);
 
