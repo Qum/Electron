@@ -1,0 +1,16 @@
+$productCatalog=electronicsProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$facetSearchConfigName=electronicsIndex
+$facetSearchConfigDescription=Electronics Solr Index
+$searchIndexNamePrefix=electronics
+$solrIndexedType=electronicsProductType
+$indexBaseSite=electronics
+$indexLanguages=ja,en,de,zh
+$indexCurrencies=JPY,USD
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
+                                 ;$solrIndexedType; discountValue             ;double ;            ;true;    ;    ;    ;    ;discountOrderAwayPriceValueProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+
+discountOrderAwayPriceValueResolver

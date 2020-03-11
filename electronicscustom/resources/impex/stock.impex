@@ -1,0 +1,61 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products stock levels into Powertools Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;87;warehouse_e;notSpecified;1;0;0;0;14510;0
+;87;warehouse_e;notSpecified;1;0;0;0;14512;0
+;87;warehouse_e;notSpecified;1;0;0;0;14514;0
+;87;warehouse_e;notSpecified;1;0;0;0;14515;0
+;87;warehouse_e;notSpecified;1;0;0;0;14516;0
+;87;warehouse_e;notSpecified;1;0;0;0;14517;0
+;87;warehouse_e;notSpecified;1;0;0;0;14518;0
+;87;warehouse_e;notSpecified;1;0;0;0;14519;0
+;87;warehouse_e;notSpecified;1;0;0;0;14501;0
+;87;warehouse_e;notSpecified;1;0;0;0;14502;0
+;87;warehouse_e;notSpecified;1;0;0;0;14503;0
+;87;warehouse_e;notSpecified;1;0;0;0;14504;0
+;87;warehouse_e;notSpecified;1;0;0;0;14505;0
+;87;warehouse_e;notSpecified;1;0;0;0;14506;0
+;87;warehouse_e;notSpecified;1;0;0;0;14507;0
+;87;warehouse_e;notSpecified;1;0;0;0;14508;0
+;87;warehouse_e;notSpecified;1;0;0;0;14509;0
+;87;warehouse_e;notSpecified;1;0;0;0;14511;0
+;87;warehouse_e;notSpecified;1;0;0;0;14500;0
+
+
+UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+;14510;;14510:warehouse_e;electro
+;14511;;14511:warehouse_e;electro
+;14512;;14512:warehouse_e;electro
+;14513;;14513:warehouse_e;electro
+;14514;;14514:warehouse_e;electro
+;14515;;14515:warehouse_e;electro
+;14516;;14516:warehouse_e;electro
+;14517;;14517:warehouse_e;electro
+;14518;;14518:warehouse_e;electro
+;14519;;14519:warehouse_e;electro
+;14500;;14500:warehouse_e;electro
+;14501;;14501:warehouse_e;electro
+;14502;;14502:warehouse_e;electro
+;14503;;14503:warehouse_e;electro
+;14504;;14504:warehouse_e;electro
+;14505;;14505:warehouse_e;electro
+;14506;;14506:warehouse_e;electro
+;14507;;14507:warehouse_e;electro
+;14508;;14508:warehouse_e;electro
+;14509;;14509:warehouse_e;electro
