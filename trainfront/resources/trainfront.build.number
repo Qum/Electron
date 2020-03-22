@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Sep 05 10:13:28 CEST 2019
+builddate=20190905 1010
+description=trainfront
+name=trainfront
+releasedate=20181129 1417
+vendor=hybris
+version=1811.13
+version.api=1811

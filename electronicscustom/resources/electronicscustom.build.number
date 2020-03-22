@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Sep 05 10:10:51 CEST 2019
+builddate=20190905 1010
+description=electronicscustom
+name=electronicscustom
+releasedate=20181129 1417
+vendor=hybris
+version=1811.13
+version.api=1811

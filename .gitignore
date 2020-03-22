@@ -42,3 +42,6 @@ base.properties
 **/tags/addons
 **/messages/addons
 *_bof.jar
+
+idea-module-files/
+.idea/
