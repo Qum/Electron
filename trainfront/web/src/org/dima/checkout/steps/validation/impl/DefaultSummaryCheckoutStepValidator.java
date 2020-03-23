@@ -24,17 +24,11 @@ public class DefaultSummaryCheckoutStepValidator extends AbstractCheckoutStepVal
 	private static final Logger LOGGER = Logger.getLogger(DefaultSummaryCheckoutStepValidator.class);
 
 	@Override
-	public ValidationResults validateOnEnter(final RedirectAttributes redirectAttributes)
-	{
+	public ValidationResults validateOnEnter(final RedirectAttributes redirectAttributes) {
 
 		final ValidationResults cartResult = checkCartAndDelivery(redirectAttributes);
 		if (cartResult != null) {
 			return cartResult;
-		}
-
-		final ValidationResults paymentResult = checkPaymentMethodAndPickup(redirectAttributes);
-		if (paymentResult != null) {
-			return paymentResult;
 		}
 
 		return ValidationResults.SUCCESS;
