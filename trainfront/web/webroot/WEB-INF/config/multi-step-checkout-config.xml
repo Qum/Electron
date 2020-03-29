@@ -151,7 +151,7 @@
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
 				<entry key="current" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
-				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_ORDER_MAIL_NOTIFICATION"/>
 			</map>
 		</property>
 		<property name="progressBarId" value="deliveryMethod"/>
@@ -171,13 +171,27 @@
 		<property name="progressBarId" value="paymentMethod"/>
 	</bean>
 
+	<alias name="defaultResponsiveOrderMailNotificationCheckoutStep" alias="responsiveOrderMailNotificationCheckoutStep" />
+	<bean id="defaultResponsiveOrderMailNotificationCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
+		<property name="checkoutStepValidator" ref="defaultOrderMailNotificationCheckoutStepValidator"/>
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+				<entry key="current" value-ref="REDIRECT_TO_ORDER_MAIL_NOTIFICATION"/>
+				<entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
+			</map>
+		</property>
+		<property name="progressBarId" value="orderMailNotification"/>
+	</bean>
+
 	<alias name="defaultResponsiveSummaryCheckoutStep" alias="responsiveSummaryCheckoutStep" />
 	<bean id="defaultResponsiveSummaryCheckoutStep"  parent="checkoutStep">
 		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
 		<property name="checkoutStepValidator" ref="defaultResponsiveSummaryCheckoutValidator"/>
 		<property name="transitions">
 			<map merge="true">
-				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="previous" value-ref="REDIRECT_TO_ORDER_MAIL_NOTIFICATION"/>
 				<entry key="current" value-ref="REDIRECT_TO_SUMMARY"/>
 				<entry key="next" value="redirect:/checkout/orderConfirmation/%s"/>
 			</map>
@@ -272,7 +286,7 @@
 				<entry key="multi" value-ref="responsiveMultiStepCheckout"/>
 				<entry key="delivery-address" value-ref="responsiveDeliveryAddressCheckoutStep"/>
 				<entry key="delivery-method" value-ref="responsiveDeliveryMethodCheckoutStep"/>
-				<entry key="payment-method" value-ref="responsivePaymentMethodCheckoutStep"/>
+				<entry key="order-Mail-Notification" value-ref="responsiveOrderMailNotificationCheckoutStep"/>
 				<entry key="summary" value-ref="responsiveSummaryCheckoutStep"/>
 			</map>
 		</property>
@@ -281,7 +295,7 @@
 				<entry key="FAILED" value-ref="REDIRECT_TO_CART"/>
 				<entry key="REDIRECT_TO_DELIVERY_ADDRESS" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
 				<entry key="REDIRECT_TO_CART" value-ref="REDIRECT_TO_CART"/>
-				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="REDIRECT_TO_ORDER_MAIL_NOTIFICATION" value-ref="REDIRECT_TO_ORDER_MAIL_NOTIFICATION"/>
 				<entry key="REDIRECT_TO_DELIVERY_METHOD" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
 				<entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY"/>
 			</map>
@@ -290,7 +304,7 @@
 			<map merge="true">
 				<entry key="1" value-ref="responsiveDeliveryAddressCheckoutStep"/>
 				<entry key="2" value-ref="responsiveDeliveryMethodCheckoutStep"/>
-				<entry key="3" value-ref="responsivePaymentMethodCheckoutStep"/>
+				<entry key="3" value-ref="responsiveOrderMailNotificationCheckoutStep"/>
 				<entry key="4" value-ref="responsiveSummaryCheckoutStep"/>
 			</map>
 		</property>
@@ -317,6 +331,7 @@
 	<bean id="defaultResponsiveDeliveryMethodCheckoutValidator" class="org.dima.checkout.steps.validation.impl.ResponsiveDeliveryMethodCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
 	<bean id="defaultResponsivePaymentMethodCheckoutValidator" class="org.dima.checkout.steps.validation.impl.ResponsivePaymentCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
 	<bean id="defaultResponsiveSummaryCheckoutValidator" class="org.dima.checkout.steps.validation.impl.ResponsiveSummaryCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
+	<bean id="defaultOrderMailNotificationCheckoutStepValidator" class="org.dima.checkout.steps.validation.impl.DefaultOrderMailNotificationCheckoutStepValidator" parent="abstractCheckoutStepValidator" />
 
 	<!--Validation-->
 
@@ -357,6 +372,10 @@
 
 	<bean id="REDIRECT_TO_SUMMARY" class="java.lang.String">
 		<constructor-arg value="redirect:/checkout/multi/summary/view"/>
+	</bean>
+
+	<bean id="REDIRECT_TO_ORDER_MAIL_NOTIFICATION" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/order-Mail-Notification/choose"/>
 	</bean>
 
 </beans>

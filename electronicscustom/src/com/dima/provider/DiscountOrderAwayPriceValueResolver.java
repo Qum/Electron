@@ -25,16 +25,16 @@ public class DiscountOrderAwayPriceValueResolver extends AbstractValueResolver {
 			final IndexedProperty indexedProperty, final ItemModel product, final ValueResolverContext valueResolverContext)
 			throws FieldValueProviderException {
 
-		final ProductModel productModel;
+	final ProductModel productModel;
 		if (product instanceof ProductModel) {
-			productModel = (ProductModel) product;
-		}
-		else {
-			throw new FieldValueProviderException("Cannot evaluate price of non-product item");
-		}
-
-		addFieldValue(document, productModel, indexedProperty);
+		productModel = (ProductModel) product;
 	}
+		else {
+		throw new FieldValueProviderException("Cannot evaluate price of non-product item");
+	}
+
+	addFieldValue(document, productModel, indexedProperty);
+}
 
 	private void addFieldValue(final InputDocument document, final ProductModel product, final IndexedProperty indexedProperty)
 			throws FieldValueProviderException {

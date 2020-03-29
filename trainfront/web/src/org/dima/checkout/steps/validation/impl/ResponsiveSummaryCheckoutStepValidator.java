@@ -24,17 +24,10 @@ public class ResponsiveSummaryCheckoutStepValidator extends AbstractCheckoutStep
 	private static final Logger LOGGER = Logger.getLogger(ResponsiveSummaryCheckoutStepValidator.class);
 
 	@Override
-	public ValidationResults validateOnEnter(final RedirectAttributes redirectAttributes)
-	{
-
+	public ValidationResults validateOnEnter(final RedirectAttributes redirectAttributes) {
 		final ValidationResults cartResult = checkCartAndDelivery(redirectAttributes);
 		if (cartResult != null) {
 			return cartResult;
-		}
-
-		final ValidationResults paymentResult = checkPaymentMethodAndPickup(redirectAttributes);
-		if (paymentResult != null) {
-			return paymentResult;
 		}
 
 		return ValidationResults.SUCCESS;
