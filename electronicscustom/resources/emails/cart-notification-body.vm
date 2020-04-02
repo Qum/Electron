@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+You have been ordered :
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        #foreach( $item in ${ctx.itemsInCart} )
+            <tr>
+                <td>$item</td>
+            </tr>
+        #end
+    </table>
+        <h1>Total price ${ctx.totalCartPrice}</h1>
+</body>
+</html>

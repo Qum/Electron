@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
+import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dima.facades.CartNoticationFacade;
 
 @Controller
 @RequestMapping(value = "/checkout/multi/order-Mail-Notification")
@@ -27,6 +29,8 @@ public class OrderMailNotificationCheckoutController extends AbstractCheckoutSte
 	private static final String ORDER_MAIL_NOTIFICATION = "order-Mail-Notification";
 
 	private static final Logger LOGGER = Logger.getLogger(OrderMailNotificationCheckoutController.class);
+	@Resource(name = "cartNoticationFacade")
+	private CartNoticationFacade cartNoticationFacade;
 
 	@Override
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
@@ -52,7 +56,8 @@ public class OrderMailNotificationCheckoutController extends AbstractCheckoutSte
 	public String doSelectDeliveryMode(
 			@RequestParam(value = "order_mail_notificationew", defaultValue = "") String needMailNotification) {
 		if (StringUtils.isNotEmpty(needMailNotification)) {
-			LOGGER.info("need mail notif");
+			final CartData cartData = getCheckoutFacade().getCheckoutCart();
+			cartNoticationFacade.sendMailToCustomer(cartData);
 		}
 		return getCheckoutStep().nextStep();
 	}

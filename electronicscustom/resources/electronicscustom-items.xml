@@ -15,7 +15,9 @@
 
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
-
+	<collectiontypes>
+		<collectiontype elementtype="java.lang.String" code="ItemsList" autocreate="true" type="list" generate="true"/>
+	</collectiontypes>
 	<itemtypes>
 <!--
 		<itemtype generate="true"
@@ -43,5 +45,16 @@
 			</attributes>
 		</itemtype>
 -->
+		<itemtype code="CartNotificationEmailProcess" extends="StoreFrontCustomerProcess"
+			jaloclass="com.dima.core.jalo.process.CartNotificationEmailProcess">
+			<attributes>
+				<attribute qualifier="itemsInCart" type="ItemsList">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="totalCartPrice" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
 	</itemtypes>
 </items>

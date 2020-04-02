@@ -1,0 +1,17 @@
+$contentCat=electronicsContentCatalog
+$contentCatalogV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCat]),CatalogVersion.version[default=Staged])[default=$contentCat:Staged]
+$emailResource=$config-emailResourcesValue
+$emailPackageName=$config-emailContextPackagedName
+$lang=en
+
+INSERT_UPDATE RendererTemplate	  ;code[unique=true]		    ;contextClass								;templateScript[lang=en,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];rendererType(code)[default='velocity']
+                                  ;cart-notification-body		;$emailPackageName.CartNotificationEmailContext	;$emailResource/cart-notification-body.vm;
+                                  ;cart-notification-subject	;$emailPackageName.CartNotificationEmailContext	;$emailResource/cart-notification-subject.vm;
+
+# Create Email page Template
+INSERT_UPDATE EmailPageTemplate	;$contentCatalogV[unique=true];uid[unique=true]		;active	;frontendTemplateName	;subject(code)							;htmlTemplate(code)		;restrictedPageTypes(code)
+                                   ;						;CartNotificationEmailTemplate;true	;CartNotificationEmail		;cart-notification-subject				;cart-notification-body	;EmailPage
+
+# Create Email Page
+INSERT_UPDATE EmailPage	;$contentCatalogV[unique=true];uid[unique=true]	;masterTemplate(uid,$contentCatalogV);approvalStatus(code)[default='approved']
+                           ;						;CartNotificationEmail	;CartNotificationEmailTemplate;
